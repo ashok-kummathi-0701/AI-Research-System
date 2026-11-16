@@ -1,22 +1,26 @@
-from langchain.agents import create_agent
-# from langchain_google_genai import ChatGoogleGenerativeAI
-# from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from tools import web_search, scrape_url
+
+import os
+import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# Load Groq API key
+if "GROQ_API_KEY" in st.secrets:
+    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
-#model setup
 from langchain_groq import ChatGroq
+from langchain.agents import create_agent
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+from tools import web_search, scrape_url
 
 llm = ChatGroq(
     model="openai/gpt-oss-120b",
     temperature=0
 )
+
 # llm = ChatGoogleGenerativeAI(
 #     model="gemini-3.8-flash",
 #     temperature=0
