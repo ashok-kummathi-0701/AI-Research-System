@@ -1,3 +1,14 @@
+load_dotenv()
+
+api_key = (
+    st.secrets["TAVILY_API_KEY"]
+    if "TAVILY_API_KEY" in st.secrets
+    else os.getenv("TAVILY_API_KEY")
+)
+
+tavily = TavilyClient(api_key=api_key)
+
+import streamlit as st
 from langchain.tools import tool
 import requests
 from bs4 import BeautifulSoup
