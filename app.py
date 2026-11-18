@@ -509,10 +509,10 @@ if r:
         ).strip("_") or "research"
 
         st.download_button(
-            label="⬇  Download Research Report (.md)",
+            label="⬇  Download Research Report (.pdf)",
             data=r["writer"],
-            file_name=f"{safe_topic}_research_report.md",
-            mime="text/markdown",
+            file_name=f"{safe_topic}_research_report.pdf",
+            mime="application/pdf",
             use_container_width=True,
             key="download_research_report",
         )
