@@ -135,26 +135,6 @@ html, body, [class*="css"] {
     transform: translateY(0) !important;
 }
 
-/* ── Report download button ── */
-.stDownloadButton > button {
-    background: linear-gradient(135deg, #ff8c32 0%, #ff5a1a 100%) !important;
-    color: #0a0a0f !important;
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 0.95rem !important;
-    letter-spacing: 0.04em !important;
-    border: none !important;
-    border-radius: 10px !important;
-    padding: 0.7rem 2.2rem !important;
-    box-shadow: 0 4px 20px rgba(255,140,50,0.3) !important;
-    width: 100%;
-}
-.stDownloadButton > button:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 28px rgba(255,140,50,0.4) !important;
-    opacity: 0.95 !important;
-}
-
 /* ── Pipeline step cards ── */
 .step-card {
     background: rgba(255,255,255,0.03);
@@ -502,19 +482,12 @@ if r:
         st.markdown(r["writer"])   # render markdown natively
         st.markdown("</div>", unsafe_allow_html=True)
 
-        # Download the generated report
-        safe_topic = "".join(
-            char.lower() if char.isalnum() else "_"
-            for char in st.session_state.get("topic_input", "research")
-        ).strip("_") or "research"
-
+        # Download
         st.download_button(
-            label="⬇  Download Research Report (.pdf)",
+            label="⬇  Download Report (.md)",
             data=r["writer"],
-            file_name=f"{safe_topic}_research_report.pdf",
-            mime="application/pdf",
-            use_container_width=True,
-            key="download_research_report",
+            file_name=f"research_report_{int(time.time())}.md",
+            mime="text/markdown",
         )
 
     # Critic feedback
